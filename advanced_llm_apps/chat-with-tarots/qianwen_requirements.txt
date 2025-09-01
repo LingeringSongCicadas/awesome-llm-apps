@@ -1,0 +1,8 @@
+# Core dependencies for qianwen tarot chat app
+streamlit
+pandas
+langchain
+langchain-core
+dashscope
+python-dotenv
+pillow
