@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG智能检索技术展示平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .category-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .project-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+        }
+        
+        .badge-custom {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.3rem 0;
+            color: #6b7280;
+        }
+        
+        .feature-list i {
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+        
+        .target-audience {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .pricing-info {
+            background: #fef3c7;
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+        }
+        
+        .stats-section {
+            background: #1f2937;
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .cta-section {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-brain me-2"></i>RAG技术平台
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#categories">解决方案</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">项目展示</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#business">商业应用</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">RAG智能检索技术</h1>
+            <p class="hero-subtitle">为您提供19种不同场景的检索增强生成解决方案</p>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fas fa-rocket fa-3x mb-3"></i>
+                        <h4>快速部署</h4>
+                        <p>一键启动，即刻体验</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fas fa-cogs fa-3x mb-3"></i>
+                        <h4>灵活定制</h4>
+                        <p>多种模型，满足不同需求</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <i class="fas fa-shield-alt fa-3x mb-3"></i>
+                        <h4>企业级安全</h4>
+                        <p>本地部署，数据安全</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计数据 -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">19+</div>
+                    <p>RAG解决方案</p>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">10+</div>
+                    <p>支持的LLM模型</p>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">5+</div>
+                    <p>行业应用场景</p>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">100%</div>
+                    <p>开源免费</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决方案分类 -->
+    <section id="categories" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">解决方案分类</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card category-card text-center p-4">
+                        <i class="fas fa-robot category-icon"></i>
+                        <h4>智能代理RAG</h4>
+                        <p>具备推理能力的智能RAG系统，支持多轮对话和复杂查询处理</p>
+                        <div class="target-audience">
+                            <strong>适用用户:</strong> 企业客服、教育机构、咨询公司
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card category-card text-center p-4">
+                        <i class="fas fa-building category-icon"></i>
+                        <h4>企业级RAG</h4>
+                        <p>生产就绪的RAG服务，支持大规模部署和高并发访问</p>
+                        <div class="target-audience">
+                            <strong>适用用户:</strong> 大型企业、政府机构、金融机构
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card category-card text-center p-4">
+                        <i class="fas fa-laptop category-icon"></i>
+                        <h4>本地部署RAG</h4>
+                        <p>完全本地化的RAG解决方案，保护数据隐私和安全</p>
+                        <div class="target-audience">
+                            <strong>适用用户:</strong> 中小企业、个人开发者、隐私敏感行业
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示 -->
+    <section id="projects" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">项目展示</h2>
+            
+            <!-- 分类标签 -->
+            <ul class="nav nav-pills justify-content-center mb-4" id="projectTabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#intelligent">智能代理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#enterprise">企业级</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#local">本地部署</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#specialized">专业应用</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- 智能代理RAG -->
+                <div class="tab-pane fade show active" id="intelligent">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>GPT-5智能RAG</h5>
+                                    <span class="badge bg-primary badge-custom">最新</span>
+                                </div>
+                                <p class="text-muted">使用最新GPT-5模型的高级RAG应用，支持实时流式响应和动态知识库扩展</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>实时流式响应</li>
+                                    <li><i class="fas fa-check"></i>Markdown格式化</li>
+                                    <li><i class="fas fa-check"></i>动态知识扩展</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 高端客服系统，月订阅￥299-999
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>数学导师RAG</h5>
+                                    <span class="badge bg-success badge-custom">教育</span>
+                                </div>
+                                <p class="text-muted">专门解决JEE水平数学问题的AI导师，具备人机反馈循环和基准测试</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>66%准确率</li>
+                                    <li><i class="fas fa-check"></i>步骤解析</li>
+                                    <li><i class="fas fa-check"></i>反馈学习</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 在线教育平台，年费￥1,999
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>纠错式RAG</h5>
+                                    <span class="badge bg-warning badge-custom">高精度</span>
+                                </div>
+                                <p class="text-muted">多阶段纠错工作流的复杂RAG系统，具备文档相关性评分和查询优化</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>相关性评分</li>
+                                    <li><i class="fas fa-check"></i>查询优化</li>
+                                    <li><i class="fas fa-check"></i>多阶段纠错</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 专业咨询服务，按项目￥5万-20万
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 企业级RAG -->
+                <div class="tab-pane fade" id="enterprise">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>RAG即服务</h5>
+                                    <span class="badge bg-primary badge-custom">SaaS</span>
+                                </div>
+                                <p class="text-muted">生产就绪的RAG服务，使用Claude 3.5 Sonnet，支持快速部署</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>生产就绪</li>
+                                    <li><i class="fas fa-check"></i>少于50行代码</li>
+                                    <li><i class="fas fa-check"></i>API接口</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 企业SaaS服务，月费￥2,999-9,999
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>混合搜索RAG</h5>
+                                    <span class="badge bg-info badge-custom">高性能</span>
+                                </div>
+                                <p class="text-muted">结合语义搜索和关键词搜索，支持多模型集成和重排序机制</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>混合搜索</li>
+                                    <li><i class="fas fa-check"></i>多模型集成</li>
+                                    <li><i class="fas fa-check"></i>重排序优化</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 企业文档管理，年费￥19,999-49,999
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>视觉RAG</h5>
+                                    <span class="badge bg-danger badge-custom">多模态</span>
+                                </div>
+                                <p class="text-muted">处理图像和PDF页面的多模态RAG系统，支持无OCR图像分析</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>多模态处理</li>
+                                    <li><i class="fas fa-check"></i>无需OCR</li>
+                                    <li><i class="fas fa-check"></i>PDF页面分析</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 医疗/金融分析，按使用量计费
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 本地部署RAG -->
+                <div class="tab-pane fade" id="local">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>DeepSeek本地RAG</h5>
+                                    <span class="badge bg-secondary badge-custom">本地</span>
+                                </div>
+                                <p class="text-muted">使用DeepSeek模型的本地RAG推理代理，支持双模式操作</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>本地部署</li>
+                                    <li><i class="fas fa-check"></i>双模式操作</li>
+                                    <li><i class="fas fa-check"></i>隐私保护</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 私有部署服务，一次性￥10万-30万
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>Llama3.1本地RAG</h5>
+                                    <span class="badge bg-secondary badge-custom">开源</span>
+                                </div>
+                                <p class="text-muted">基于开源Llama3.1的本地RAG实现，完全免费使用</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>开源免费</li>
+                                    <li><i class="fas fa-check"></i>本地运行</li>
+                                    <li><i class="fas fa-check"></i>可定制化</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 中小企业解决方案，技术服务费￥2万-8万
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>Qwen本地RAG</h5>
+                                    <span class="badge bg-secondary badge-custom">中文优化</span>
+                                </div>
+                                <p class="text-muted">使用通义千问模型的本地RAG系统，中文处理能力优秀</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>中文优化</li>
+                                    <li><i class="fas fa-check"></i>本地私有</li>
+                                    <li><i class="fas fa-check"></i>快速响应</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 中文企业市场，年服务费￥5万-15万
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 专业应用RAG -->
+                <div class="tab-pane fade" id="specialized">
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>自主RAG系统</h5>
+                                    <span class="badge bg-success badge-custom">自动化</span>
+                                </div>
+                                <p class="text-muted">全自动的RAG系统，可处理PDF并与网络搜索结合</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>全自动处理</li>
+                                    <li><i class="fas fa-check"></i>PDF支持</li>
+                                    <li><i class="fas fa-check"></i>网络搜索</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 自动化办公解决方案
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>博客搜索RAG</h5>
+                                    <span class="badge bg-info badge-custom">内容</span>
+                                </div>
+                                <p class="text-muted">专门用于博客内容搜索的RAG系统，针对内容创作优化</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>内容优化</li>
+                                    <li><i class="fas fa-check"></i>博客专用</li>
+                                    <li><i class="fas fa-check"></i>搜索精准</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 内容平台工具
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card project-card p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h5>数据库路由RAG</h5>
+                                    <span class="badge bg-warning badge-custom">智能路由</span>
+                                </div>
+                                <p class="text-muted">智能路由到不同数据库的RAG系统，自动选择最适合的数据源</p>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i>智能路由</li>
+                                    <li><i class="fas fa-check"></i>多数据源</li>
+                                    <li><i class="fas fa-check"></i>自动选择</li>
+                                </ul>
+                                <div class="pricing-info">
+                                    <strong>商业价值:</strong> 企业数据管理平台
+                                </div>
+                                <button class="btn btn-primary mt-3 w-100">查看演示</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 商业应用场景 -->
+    <section id="business" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">商业应用场景</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-center p-4 h-100">
+                        <i class="fas fa-building fa-3x text-primary mb-3"></i>
+                        <h5>企业知识管理</h5>
+                        <p>内部文档检索、员工培训、知识传承</p>
+                        <div class="mt-auto">
+                            <strong class="text-success">年收益: ￥50万-200万</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-center p-4 h-100">
+                        <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                        <h5>在线教育</h5>
+                        <p>个性化学习、智能答疑、考试辅导</p>
+                        <div class="mt-auto">
+                            <strong class="text-success">年收益: ￥100万-500万</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-center p-4 h-100">
+                        <i class="fas fa-stethoscope fa-3x text-primary mb-3"></i>
+                        <h5>医疗健康</h5>
+                        <p>医学文献检索、诊断辅助、病例分析</p>
+                        <div class="mt-auto">
+                            <strong class="text-success">年收益: ￥200万-1000万</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card text-center p-4 h-100">
+                        <i class="fas fa-gavel fa-3x text-primary mb-3"></i>
+                        <h5>法律服务</h5>
+                        <p>案例检索、合同分析、法规查询</p>
+                        <div class="mt-auto">
+                            <strong class="text-success">年收益: ￥300万-1500万</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动召唤 -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="mb-4">准备开始您的RAG之旅？</h2>
+            <p class="fs-5 mb-4">选择最适合您需求的RAG解决方案，立即开始体验智能检索的强大功能</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <button class="btn btn-light btn-lg w-100">
+                                <i class="fas fa-play me-2"></i>在线演示
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-outline-light btn-lg w-100">
+                                <i class="fas fa-download me-2"></i>下载源码
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-light btn-lg w-100">
+                                <i class="fas fa-phone me-2"></i>联系咨询
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>RAG技术平台</h5>
+                    <p>专业的检索增强生成解决方案提供商</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2025 RAG技术平台. 保留所有权利.</p>
+                    <div>
+                        <a href="#" class="text-white me-3"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 导航栏背景变化
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(33, 37, 41, 0.95)';
+            } else {
+                navbar.style.backgroundColor = '';
+            }
+        });
+
+        // 项目演示按钮功能
+        document.querySelectorAll('.project-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const projectTitle = this.closest('.project-card').querySelector('h5').textContent;
+                alert(`即将启动 "${projectTitle}" 的演示环境\n\n这里将会跳转到具体的项目演示页面或启动本地服务。`);
+            });
+        });
+
+        // CTA按钮功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 在线演示按钮
+            const demoBtn = document.querySelector('.cta-section .btn-light:first-child');
+            if (demoBtn) {
+                demoBtn.addEventListener('click', function() {
+                    alert('正在准备在线演示环境...\n\n将为您展示最受欢迎的RAG项目演示。');
+                });
+            }
+
+            // 下载源码按钮
+            const downloadBtn = document.querySelector('.cta-section .btn-outline-light');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    alert('即将跳转到GitHub仓库下载源码...\n\nhttps://github.com/Shubhamsaboo/awesome-llm-apps');
+                });
+            }
+
+            // 联系咨询按钮
+            const contactBtn = document.querySelector('.cta-section .btn-light:last-child');
+            if (contactBtn) {
+                contactBtn.addEventListener('click', function() {
+                    alert('联系方式：\n\n邮箱：info@ragtech.com\n电话：400-123-4567\n微信：RAGTech2025');
+                });
+            }
+        });
+
+        // 统计数字动画
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + (target === 100 ? '%' : '+');
+            }, 20);
+        }
+
+        // 当滚动到统计区域时启动动画
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach((stat, index) => {
+                        const targets = [19, 10, 5, 100];
+                        setTimeout(() => {
+                            animateCounter(stat, targets[index]);
+                        }, index * 200);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
